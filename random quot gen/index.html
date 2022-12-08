@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Learn from Wiser | Quore genaretor app </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex items-center justify-center h-[100vh] flex-col">
+
+    <div class="w-full flex justify-center theme">
+        <button class="bg-blue-500 px-6 py-3 rounded font-bold mt-6 mx-auto drop-shadow-2xl"> Change Theme </button>
+    </div>
+
+    <div class="m-auto max-w-[45rem] border rounded p-6 font-bold font-mono">
+        <h3 class="text-3xl desc"> Click the Button to Read a new quote </h3>
+
+            <h4 class="mt-8 auth">  </h4>
+
+            <button class="bg-blue-500 px-6 py-3 rounded font-bold mt-6 mx-auto w-full drop-shadow-2xl btn"> New Quote </button>
+    </div>
+
+
+    <script>
+
+        // Gemarating Quotes
+        let desc = document.querySelector('.desc')
+        let auth = document.querySelector('.auth')
+
+        document.querySelector('.btn').addEventListener('click', ()=>{
+            const getQuite = async () => {
+                let res = await fetch('https://api.quotable.io/random')
+                if(res.ok){
+                    let quote = await res.json()
+                    desc.innerHTML = quote.content
+                    auth.innerHTML = ` - ${quote.author}`
+                }
+            }
+            getQuite()
+        })
+
+
+        // Changing Color Theme
+        const barkTheme = () => {
+            document.querySelector('body').style.backgroundColor = "#333"
+            desc.style.color = "#fff"
+            auth.style.color = "#fff"
+        }
+        document.querySelector('.theme').addEventListener('click', () => {
+            
+        })
+
+    </script>
+</body>
+
+</html>
